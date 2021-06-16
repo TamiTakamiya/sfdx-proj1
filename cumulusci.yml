@@ -6,6 +6,10 @@ project:
         api_version: '50.0'
     git:
     source_format: sfdx
+sources:
+    sfdx-proj2:
+        github: https://github.com/TamiTakamiya/sfdx-proj2
+        branch: main
 
 tasks:
     robot:

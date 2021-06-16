@@ -1,18 +1,43 @@
-# Salesforce DX Project: Next Steps
+# SFDX Sample "Project 1" For CumulusCI Task Test
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Summary
+This is an SFDX sample repository for CumulusCI (CCI) task test.
+This repository is supoosed to be used with 
+[another repository](https://github.com/TamiTakamiya/sfdx-proj2).
 
-## How Do You Plan to Deploy Your Changes?
+## Setup
+1. Clone this repository on your PC
+1. Set your Dev Hub org with
+    ```
+    sfdx auth:web:login -d -a DevHub 
+    ```
+## Instructions
+Try to execute two tasks defined in another repository.
+The `cumulusci.yml` contained in this repo has a source
+definition to the another repository and theoretically
+those tasks can be executed without problems.
+```
+sources:
+    sfdx-proj2:
+        github: https://github.com/TamiTakamiya/sfdx-proj2
+        branch: main
+```
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+1. dxtask
+    ```
+    cci task run sfdx-proj2:dxtask
+    ```
+    This task should display the output of `sfdx force:org:list` command.
 
-## Configure Your Salesforce DX Project
+2. mytask
+    ```
+    cci task run sfdx-proj2:mytask
+    ```
+    This task is supposed to invoke the `MyTask` class defined 
+    in `scripts/tasks/MyTask.py`in another repository
+    and print the output message `This is my task.` 
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+    However, it fails with the following message:
+    ```
+    No module named 'scripts.tasks'
+    ```
