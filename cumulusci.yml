@@ -1,0 +1,21 @@
+minimum_cumulusci_version: '3.36.0'
+project:
+    name: sfdx-proj1
+    package:
+        name: sfdx-proj1
+        api_version: '50.0'
+    git:
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/sfdx-proj1/tests
+            options:
+                outputdir: robot/sfdx-proj1/results
+
+    robot_testdoc:
+        options:
+            path: robot/sfdx-proj1/tests
+            output: robot/sfdx-proj1/doc/sfdx-proj1_tests.html
+
